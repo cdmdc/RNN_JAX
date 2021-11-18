@@ -1,13 +1,13 @@
 # RNN_JAX
+
 Training recurrent neural networks (RNNs) based on Jax. 
+
+Dependencies: jax=0.1.72, numpy=1.19.2, matplotlib=3.3.2, pickle5
 
 ########################
 rnn_jax_build: functions to build RNN
 
 rnn_jax_run: functions to run RNN
-
-Dependencies: jax=0.1.72, numpy=1.19.2, matplotlib=3.3.2, pickle5
-
 
 Currently training on Context Switch Task. However, by overriding build_task in rnn_jax_build one can train on any task. 
 
