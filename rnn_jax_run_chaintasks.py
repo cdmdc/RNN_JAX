@@ -5,18 +5,14 @@ Created on Mon Jul 13 10:46:03 2020
 
 @author: davidavinci
 
-Class to run RNN built in JAX
+Class to run Jax based RNN training on multiple tasks sequentially.
 
 Dependencies: jax.numpy, jax.random, rnn_jax_build, pickle
 
-Class to run RNN training on Context Switch task. However, by overriding
-build_task in rnn_jax_build one can plug in custom task building function.
-
-Class is initialized with parameters that work well for neural tasks such as 
-the context switch task. However, these parameters can be overriden/tuned 
-for individual runs using set_params
-
-Task related variables can be set using set_task_params after initializing class
+Class to run RNN training on multiple tasks. It can chain tasks sequentially.
+For now it chains 'MemPro' and 'MemAnti' task using build_task from 
+rnn_jax_build_chaintasks. Can be extended to chain all nine tasks that can be 
+built with build_task function.
 
 """
 
@@ -26,9 +22,7 @@ from jax import random #https://jax.readthedocs.io/en/latest/notebooks/Common_Go
 
 
 #Import train class rnn_jax_build
-from rnn_jax_build import rnn_run
-
-#######################################
+from rnn_jax_build_chaintasks import build_chaintasks,run_chaintasks
 
                 
 ########################## RUN TRAINING #################################    
@@ -48,7 +42,7 @@ decay_lr = False
 params_to_tune = input_size,state_size,g,batch_size,\
     num_iters,nstep_sizes,init_step_size,decay_lr
 
-rnn_run_instance = rnn_run()
+rnn_run_instance = run_chaintasks()
 
 rnn_run_instance.run_training_loop(params_to_tune,total_number_runs)   
 
